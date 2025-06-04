@@ -79,21 +79,21 @@
 </head>
 <body>
     <div class="quiz-container">
-        <h1>Tenho um presente pra Você, Mayara! ❤️</h1>
+        <h1>Tenho um presente pra Você Mayara! ❤️</h1>
         <div class="question" id="question">
-        vamos ver se você vai acertar
+        Vamos ver se você vai acertar, você terá duas tentativas
         </div>
         <div class="options">
             <button onclick="checkAnswer('a')">A) Um anel</button>
             <button onclick="checkAnswer('b')">B) Um colar</button>
             <button onclick="checkAnswer('c')">C) Uma pulseira</button>
-            <button onclick="checkAnswer('d')">D) um Brinco</button>
+            <button onclick="checkAnswer('d')">D) um par de Brinco</button>
         </div>
         <div class="feedback" id="feedback"></div>
         <div class="attempts" id="attempts">Tentativas restantes: 2</div>
         <div class="message hidden" id="loveMessage">
             <p>🎉 Parabéns, meu amor! Você acertou!</p>
-            <p>Feliz Dia dos Namorados! Eu te amo muito, e cada dia que passa eu te amo ainda mais!</p>
+            <p>Feliz Dia dos Namorados! Eu te amo muito, e cada dia que passa te amo ainda mais!</p>
         </div>
     </div>
 
@@ -129,7 +129,7 @@
                     // Opcional: mostrar uma mensagem de "você errou, mas eu te amo"
                     loveMessageElement.innerHTML = `
                         <p>Ah, meu amor, as tentativas acabaram!</p>
-                        <p>Mas não importa, a resposta correta é a letra "D", mesmo que você não tenha acertado, **Feliz Dia dos Namorados, Mayara!** Eu te amo muito!</p>
+                        <p>Mas não importa, a resposta correta é a letra "D", mesmo que você não tenha acertado, **Feliz Dia dos Namorados! Eu te amo muito.</p>
                     `;
                     loveMessageElement.classList.remove('hidden');
                 }
