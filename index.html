@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mayara</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e7abf7;
+            margin: 0;
+        }
+        .quiz-container {
+            background-color: #f2d6fd;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .options-container button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #df5ff0;
+            border-radius: 5px;
+            background-color: #f6bef8;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .options-container button:hover {
+            background-color: #dcdcdc;
+        }
+        .feedback {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .correct {
+            color: #28a745; /* Verde para resposta correta */
+        }
+        .incorrect {
+            color: #dc3545; /* Vermelho para resposta incorreta */
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>Tennho uma surpresa pra você, qual seria o presente?</h2>
+        <div class="options-container">
+            <button onclick="checkAnswer('a')">A) um Anel</button>
+            <button onclick="checkAnswer('b')">B) Um Cordão</button>
+            <button onclick="checkAnswer('c')">C) Uma Pulseira</button>
+            <button onclick="checkAnswer('d')">D) Um brinco</button>
+        </div>
+        <div id="feedback" class="feedback"></div>
+    </div>
+
+    <script>
+        function checkAnswer(selectedOption) {
+            const correctAnswer = 'd'; // Resposta correta é Brasília
+            const feedbackElement = document.getElementById('feedback');
+
+            if (selectedOption === correctAnswer) {
+                feedbackElement.textContent = 'Parabéns! Você acertou meu bem, é um brinco!';
+                feedbackElement.className = 'feedback correct';
+            } else {
+                feedbackElement.textContent = 'Que pena! Resposta Incorreta, tente outra vez.';
+                feedbackElement.className = 'feedback incorrect';
+            }
+        }
+    </script>
+</body>
+</html>

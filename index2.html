@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz do Amor para Mayara!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fce4ec; /* Rosa claro */
+            margin: 0;
+            color: #4a148c; /* Roxo escuro */
+            text-align: center;
+        }
+        .quiz-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+        }
+        h1 {
+            color: #880e4f; /* Vinho escuro */
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 25px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #ce93d8; /* Lilás */
+            border-radius: 8px;
+            background-color: #f3e5f5; /* Lilás claro */
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            color: #4a148c;
+        }
+        .options button:hover {
+            background-color: #e1bee7; /* Lilás mais escuro no hover */
+            transform: translateY(-2px);
+        }
+        .options button:active {
+            transform: translateY(0);
+        }
+        .feedback {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .correct {
+            color: #2e7d32; /* Verde escuro */
+        }
+        .incorrect {
+            color: #c62828; /* Vermelho escuro */
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1.3em;
+            color: #880e4f;
+        }
+        .attempts {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #7b1fa2; /* Roxo médio */
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Tenho um presente pra Você, Mayara! ❤️</h1>
+        <div class="question" id="question">
+        vamos ver se você vai acertar
+        </div>
+        <div class="options">
+            <button onclick="checkAnswer('a')">A) Um anel</button>
+            <button onclick="checkAnswer('b')">B) Um colar</button>
+            <button onclick="checkAnswer('c')">C) Uma pulseira</button>
+            <button onclick="checkAnswer('d')">D) um Brinco</button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+        <div class="attempts" id="attempts">Tentativas restantes: 2</div>
+        <div class="message hidden" id="loveMessage">
+            <p>🎉 Parabéns, meu amor! Você acertou!</p>
+            <p>Feliz Dia dos Namorados, Mayara! Eu te amo muito, e cada dia que passa eu te amo ainda mais!</p>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswer = 'd'; // A resposta correta é a opção D
+        let attemptsLeft = 2;
+        const feedbackElement = document.getElementById('feedback');
+        const attemptsElement = document.getElementById('attempts');
+        const loveMessageElement = document.getElementById('loveMessage');
+        const optionsButtons = document.querySelectorAll('.options button');
+
+        function checkAnswer(selectedOption) {
+            if (attemptsLeft === 0) {
+                return; // Impede novas tentativas se já esgotaram
+            }
+
+            if (selectedOption === correctAnswer) {
+                feedbackElement.textContent = 'Parabéns! Resposta correta!';
+                feedbackElement.className = 'feedback correct';
+                loveMessageElement.classList.remove('hidden');
+                disableButtons(); // Desabilita os botões após acertar
+            } else {
+                attemptsLeft--;
+                if (attemptsLeft > 0) {
+                    feedbackElement.textContent = `Ops, resposta incorreta! Você tem mais ${attemptsLeft} tentativa(s).`;
+                    feedbackElement.className = 'feedback incorrect';
+                    attemptsElement.textContent = `Tentativas restantes: ${attemptsLeft}`;
+                } else {
+                    feedbackElement.textContent = 'Suas tentativas acabaram. A resposta correta era: "O dia em que nos conhecemos".';
+                    feedbackElement.className = 'feedback incorrect';
+                    attemptsElement.textContent = 'Tentativas restantes: 0';
+                    disableButtons(); // Desabilita os botões após esgotar as tentativas
+                    // Opcional: mostrar uma mensagem de "você errou, mas eu te amo"
+                    loveMessageElement.innerHTML = `
+                        <p>Ah, meu amor, as tentativas acabaram!</p>
+                        <p>Mas não importa, a resposta correta é a letra "D", mesmo que você não tenha acertado, **Feliz Dia dos Namorados, Mayara!** Eu te amo muito!</p>
+                    `;
+                    loveMessageElement.classList.remove('hidden');
+                }
+            }
+        }
+
+        function disableButtons() {
+            optionsButtons.forEach(button => {
+                button.disabled = true;
+                button.style.cursor = 'not-allowed';
+                button.style.opacity = '0.7';
+            });
+        }
+    </script>
+</body>
+</html>
