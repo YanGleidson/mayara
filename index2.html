@@ -6,7 +6,7 @@
     <title>Quiz do Amor para Mayara!</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -75,26 +75,56 @@
         .hidden {
             display: none;
         }
+        /* Estilo para o botão Revelar */
+        #revelarPresenteBtn {
+            margin-top: 25px;
+            padding: 15px 30px;
+            background-color: #9c27b0; /* Roxo vibrante */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: not-allowed; /* Inicialmente desativado */
+            opacity: 0.5; /* Inicialmente menos visível */
+            transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.2s ease;
+        }
+        #revelarPresenteBtn:enabled { /* Estilo quando ativado */
+            background-color: #e91e63; /* Rosa mais forte quando ativo */
+            cursor: pointer;
+            opacity: 1;
+        }
+        #revelarPresenteBtn:enabled:hover {
+            transform: translateY(-3px);
+        }
+        #revelarPresenteBtn:enabled:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
     <div class="quiz-container">
         <h1>Tenho um presente pra Você Mayara! ❤️</h1>
         <div class="question" id="question">
-        Vamos ver se vai acertar qual é o presente? você terá duas tentativas.
+            Vamos ver se vai acertar qual é o presente? Você terá duas tentativas.
         </div>
         <div class="options">
             <button onclick="checkAnswer('a')">A) Um Livro</button>
             <button onclick="checkAnswer('b')">B) Um Relógio</button>
             <button onclick="checkAnswer('c')">C) Uma pulseira</button>
-            <button onclick="checkAnswer('d')">D) um par de Brincos</button>
+            <button onclick="checkAnswer('d')">D) Um par de Brincos</button>
         </div>
+        
         <div class="feedback" id="feedback"></div>
         <div class="attempts" id="attempts">Tentativas restantes: 2</div>
         <div class="message hidden" id="loveMessage">
             <p>🎉 Parabéns, meu amor! Você acertou!</p>
             <p>Feliz Dia dos Namorados! Eu te amo muito, e cada dia que passa te amo ainda mais!</p>
         </div>
+
+        <a href="index3.html">
+            <button id="revelarPresenteBtn" disabled>Revelar presente</button>
+        </a>
     </div>
 
     <script>
@@ -104,6 +134,7 @@
         const attemptsElement = document.getElementById('attempts');
         const loveMessageElement = document.getElementById('loveMessage');
         const optionsButtons = document.querySelectorAll('.options button');
+        const revelarPresenteBtn = document.getElementById('revelarPresenteBtn'); // Pega o botão Revelar
 
         function checkAnswer(selectedOption) {
             if (attemptsLeft === 0) {
@@ -114,7 +145,12 @@
                 feedbackElement.textContent = 'Parabéns! Resposta correta!';
                 feedbackElement.className = 'feedback correct';
                 loveMessageElement.classList.remove('hidden');
-                disableButtons(); // Desabilita os botões após acertar
+                disableButtons(); // Desabilita os botões de opção após acertar
+
+                revelarPresenteBtn.disabled = false; // ATIVA O BOTÃO REVELAR!
+                revelarPresenteBtn.style.cursor = 'pointer'; // Muda o cursor
+                revelarPresenteBtn.style.opacity = '1'; // Torna-o totalmente visível
+
             } else {
                 attemptsLeft--;
                 if (attemptsLeft > 0) {
@@ -125,14 +161,18 @@
                     feedbackElement.textContent = 'Você não acertou!.';
                     feedbackElement.className = 'feedback incorrect';
                     attemptsElement.textContent = 'Tentativas restantes: 0';
-                    disableButtons(); // Desabilita os botões após esgotar as tentativas
-                    // Opcional: mostrar uma mensagem de "você errou, mas eu te amo"
+                    disableButtons(); // Desabilita os botões de opção após esgotar as tentativas
+                    
+                    // Exibe a mensagem final para quando as tentativas acabam
                     loveMessageElement.innerHTML = `
                         <p>Ah, meu amor, as tentativas acabaram!</p>
-                        <p>Mas não importa, a resposta correta é a letra "?" não vou dizer rsrsrs, mesmo que você não tenha acertado, **Feliz Dia dos Namorados! Eu te amo muito.❤️ atualiza a pagina pra tentar novamente, bjss</p>
+                        <p>Mas não importa, a resposta correta é a letra "D", mesmo que você não tenha acertado, **Feliz Dia dos Namorados! Eu te amo muito.❤️ Atualiza a página para tentar novamente, bjss</p>
                     `;
                     loveMessageElement.classList.remove('hidden');
                 }
+                revelarPresenteBtn.disabled = true; // Garante que o botão Revelar esteja desabilitado se a resposta estiver errada
+                revelarPresenteBtn.style.cursor = 'not-allowed';
+                revelarPresenteBtn.style.opacity = '0.5';
             }
         }
 
